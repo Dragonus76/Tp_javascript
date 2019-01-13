@@ -12,7 +12,28 @@
 
 		function num2Letters(number){ // "num2Letters" se lit "number to letters", le "2" est une abréviation souvent utilisée en programmation // Notre fonction qui s'occupera de la conversion du nombre. Elle posséde un argument lui permettant de recevoir les nombres en question .
 
+		
+
+
+		if (isNaN(number) || number < 0 || 999 < number){ // Si l'argument n'est pas un nombre (isNaN), ou si le nombre est inférieur à 0, ou s'il est supérieur à 999 
+
+			return 'Veuillez entrer un nombre entier compris entre 0 et 999.'; // Alors on retourne un messages d'avertissement
 		}
+
+  // Code de de vérification de l'argument [..]
+
+  /* Ci-dessous on déclare deux tableux contenant les nombres en toutes lettres, un tableau pour les unités et un autre pour les dizaines. Le tableau des unités va du chiffres 1 à 19 afin de simplifier quelque opérations lors de la conversion du nombre en lettres. Vous comprendez ce systéme par la suite.*/
+
+  
+
+
+
+
+	}
+
+
+
+
 
 		var userEntry: // Contient le texte entré par l'utilisateur 
 
@@ -29,6 +50,61 @@
 
 			/* On "parse" (en base 10 ) la chaine de caractéres de l'utilisateur pour l'envoyer en suite à notre fonction de conversion qui renverra le resultat à la fonction alert().*/
 
+
+			var units2Letters = ['','un','deux','troix','quatre','cinq','six','sept','huit','neuf','dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf'],
+
+				tens2Letters = ['','dix','vingt','trente','quarante','cinquante','soixante','soixante','quatre-vingt','quatre-vingt'];
+
+
+				/*
+
+
+				Ci-dessous on calcule le nombre d'unités, de dizaines et de centaines à l'aide du modulo.
+
+				le principe est simple : si on prends 365 % 10 on obtient le reste de la division par 10 qui est 5. Voilà les unités.
+
+				Ensuite,  365 % 100 on obtient 65, on soustrait les unités à ce nombre 65 -= 60, et on divise par 10 pour obtenir 6, voilà les dizaines !
+
+				le principe est le même pour les centaines sauf que l'on ne soustrait pas selement les unités mais aussi les dizaines.*/
+
+
+				var units = number % 10,
+					tens = (number % 100 - units ) / 10,
+					hundreds = (number % 1000 - number % 100) / 100;
+
+
+					// Et enfin on crée les trois variables qui contiendront les unités, les dizaines et les centaines en toutes lettres    
+
+       			var unitsOut, tensOut, hundredsOut;
+
+
+
+       			// Code d'initialisation [..]
+
+
+       			if (number === 0){
+
+
+
+       				return 'zero'; // Tout simplement !  Si le nombre vaut "0" alors on retourne "zéro", normal ! 
+
+
+
+       			}else{ // Si "number" est différent de "0" alors on lance la conversion compléte du nombre
+
+       			/*
+       			Ci-dessous on calcule les unités. La derniére partie du code (aprés le +) ne doit normalement pas vous poser de problémes. Mais pour la condition ternaire je pense que vous voyer assez peu son utilité. En fait, elle va permettre d'ajouter "et-"à l'unité quand cette derniére vaudra 1 et que les dizaines seront supérieures a 0 et différentes de 8. Pourquoi ? Tout simplement parce que l'on ne dit pas "vingt-un" mais "vingt-et-un", cette regle s'applique à toute le sdizaines sauf à "quatre-vingt-un"(d'ou le tens !== 8").
+
+
+       			*/
+
+       			unitsOut = (units ===  1 && tens > 0 && tens !== 8 ? 'et-':'') + units2Letters[units];
+
+
+
+
+
+       			  }
 }
 
 
