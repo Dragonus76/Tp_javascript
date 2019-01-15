@@ -35,9 +35,6 @@
 
 
 
-		var userEntry: // Contient le texte entré par l'utilisateur 
-
-
 		while(userEntry = prompt('Indiquez le nombre à ecrire en toutes lettres (entre 0 et 999) :')){
 			/*
 
@@ -102,10 +99,79 @@
 
 
 
+ 
+       			// Conversion des unités [..]
 
 
-       			  }
-}
+
+       			/* La condition qui suit se charge de convertir les nombres allant de 11 à 19 Pourquoi cette tranche de nombres ?
+       			Parce qu'ils ne peuvent pas se decomposer (essayer de décomposer en toutes lettres le nombres "treize",vous nous en direz des nouvelles),ils nécessitent donc d'êtres mis un peu à part. 
+       			Bref, leur conversion en lettres s'effectue donc dans la partie concernant les dizaines. Ainsi donc on va se retrouver avec , par exemple,
+       			"tensOut = 'treize';" donc final on va effacer la variable "unitsOut" vu qu'elle ne servira à rien 
+
+       			*/
+
+
+       			if (tens === 1 && units > 0){
+
+
+       				tensOut = units2Letters[10 + units]: // Avec "10 + units" on obtient le nombre souhaité entre 11 et 19 
+
+       				unitsOut =''; // Cette variable ne sert plus à rien , on la vide  
+       			}
+
+
+       			/* La condition suivante va s'occuper des dizaines égales à 7 ou 9.Pourquoi ? Eh bien un peu la même raison que la précécente condition : on retrouve les nombres allant de 11 à 19.En effet, on dit bien "soixante-treize" et "quatre-vingt-treize" et non pas "soixante-dix-trois" ou autre bêties du genre. Bref,cette condition est donc chargée,
+       			elle aussi, de convertir les dizaines et les unités. Elle est aussi chargée d'ajouter la conjonction  "et-"si l'unité vaut 1,car on dit "soixante-et-onze" et non pas "soixante-onze".*/
+
+       			else if (tens=== 7 || tens === 9) {
+
+
+       				tensOut = tens2Letters[tens] + '-' + (tens === 7 && units === 1 ? 'et-':'')+units2Letters[10 + units];
+
+       					unitsOut = ''; // Cette variable ne sert plus à rien ici non plus,on la vide
+       			}
+
+
+       			// Et enfin la condition "else"s'occupe des dizaines que l'on peur qualifier de "normales".
+
+
+       			else{
+
+       				tensOut = tens2Letters[tens];
+
+       			}
+
+       			//Derniére étape, "quatre-vingt" sans unité prend un "s" à la fin :"quatre-vingts"
+
+       			tensOut +=(units === 0 && tens === 8 ? 's' : '');
+
+
+
+
+       			// Conversion des dizaines [...]
+
+       			/*
+       			La conversion des centaines se fait en une ligne et trois ternaires. Ces trois ternaires se chargent d'afficher un chiffre si nécessaire avant d'écrire "cent"(exemple : " trois-cents "), d'afficher ou non la chaîne "cent" (si il n'y a pas de centaines, on ne l' affcihe pas, normal), et enfin d'ajouter un "s" à la chaîne "cent" si il n'y a ni dizaines, ni unités et que les centaines sont supérieur à 1.
+       			*/
+
+
+       			hundredsOut = (hundreds > 1 ? units2Letters[hundreds] + '-' : '') +(hundreds > 0 ? 'cent' : '') + (hundreds > && tens == 0 && units == 0 ? 's' : '');
+
+
+       			//Conversion des centaines [...]
+
+
+
+       			/*
+       			Cette ligne de code retourne toutes les valeurs converties en les concaténant les unes aux autres avec un tiret. Pourquoi y a-t-il besoin de ternaires ? Parce que si on n'en met pas alors on risque de retourner des valeurs du genre "-quatre-vingt-"juste parce qu'il n'y avait pas de centaines et d'unités.
+
+       			*/
+
+       		return hundredsOut + (hundredsOut && tensOut ? '-' : '') + tensOut + (hundredsOut && unitsOut || tensOut && unitsOut ? '-' : '') + unitsOut;
+
+       		}
+       	}
 
 
 	</script>
